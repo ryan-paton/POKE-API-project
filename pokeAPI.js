@@ -22,7 +22,7 @@ function requestPOKEAPI() {
 	
 	// Get user input from search bar
 	
-	request.onload(parsePOKEAPI);
+	request.onload = parsePOKEAPI;
 	request.open("GET", "https://pokeapi.co/api/v2/pokemon/" + searchText + "/");
 	request.send();
 }
