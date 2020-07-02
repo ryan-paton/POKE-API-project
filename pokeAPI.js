@@ -7,10 +7,10 @@ Ryan Paton
 2020-07-01
 */
 
-function parsePOKEAPI(response) {
+function parsePOKEAPI() {
 	// Parses the JSON reponse from a HTTP GET from POKEAPI
-	console.log(response);
-	var pokemon = JSON.parse(response);
+	console.log(this.responseText);
+	var pokemon = JSON.parse(this.responseText);
 	var html = "<img src=" + pokemon.sprites.front_default + " alt=\"pokemon\"/>";
 	
 	document.getElementById("results").innerHTML = html;
@@ -23,7 +23,7 @@ function requestPOKEAPI() {
 	
 	// Get user input from search bar
 	
-	request.onload = parsePOKEAPI;
+	request.addEventListener("load", parsePOKEAPI);
 	request.open("GET", "https://pokeapi.co/api/v2/pokemon/" + searchText + "/");
 	request.send();
 }
