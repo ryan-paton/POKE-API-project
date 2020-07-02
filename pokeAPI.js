@@ -9,6 +9,7 @@ Ryan Paton
 
 function parsePOKEAPI(response) {
 	// Parses the JSON reponse from a HTTP GET from POKEAPI
+	console.log(response);
 	var pokemon = JSON.parse(response);
 	var html = "<img src=" + pokemon.sprites.front_default + " alt=\"pokemon\"/>";
 	
