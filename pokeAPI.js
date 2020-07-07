@@ -25,9 +25,10 @@ function requestPOKEAPI() {
 	// TODO: validate input
 	
 	var request = new XMLHttpRequest();
-	var searchText = document.getElementById("searchText").value;
 	
 	// Get user input from search bar
+	var searchText = document.getElementById("searchText").value;
+	searchText = searchText.toLowerCase();
 	
 	request.addEventListener("load", parsePOKEAPI);
 	request.open("GET", "https://pokeapi.co/api/v2/pokemon/" + searchText + "/");
