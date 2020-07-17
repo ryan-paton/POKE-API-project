@@ -447,7 +447,7 @@ var pokemonNames = {
 	bronzor: undefined,
 	bronzong: undefined,
 	bonsly: undefined,
-	mime jr.: undefined,
+	mimejr: undefined,
 	happiny: undefined,
 	chatot: undefined,
 	spiritomb: undefined,
