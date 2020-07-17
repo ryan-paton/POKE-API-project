@@ -6,6 +6,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 		<title>POKE API Project</title>
+		
+		<script src="names.js"></script>
 		<script src="pokeAPI.js"></script>
 	</head>
 	
@@ -17,12 +19,17 @@
 				<p>Type the name of a pokemon and click search</p>
 				<div>
 					<input id="searchText" type="text"/>
-					<button onclick="requestPOKEAPI()" type="button">Search</button>
+					<button onclick="pokeSearch()" type="button">Search</button>
 				</div>
 			</div>
 			
 			<!-- Display results -->
 			<div id="results">
+			
+			</div>
+			
+			<!-- Search history -->
+			<div id="history">
 			
 			</div>
 		</div>
