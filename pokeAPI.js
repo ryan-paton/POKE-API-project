@@ -16,7 +16,7 @@ function parsePOKEAPI() {
 	var pokemon = JSON.parse(this.responseText);
 	
 	// Save the result to reduce requests to the POKEAPI
-	pokemonList[pokemon.name] = pokemon;
+	window.pokemonList[pokemon.name] = pokemon;
 	
 	// Add image of the pokemon to the webpage
 	// TODO: Display cards with more than just the picture of a pokemon
@@ -44,8 +44,8 @@ function pokeSearch() {
 	var searchText = document.getElementById("searchText").value;
 	searchText = searchText.toLowerCase();
 	
-	if (searchText in pokemonList) {
-		if (pokemonList[searchText] == undefined) {
+	if (searchText in window.pokemonList) {
+		if (window.pokemonList[searchText] == undefined) {
 			requestPOKEAPI(searchText);
 		}
 		else {
