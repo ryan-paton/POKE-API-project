@@ -9,6 +9,7 @@ Ryan Paton
 
 // TODO: Display cards with more than just the picture of a pokemon
 // TODO: Display cards with pokemon search history
+// TODO: change to allow pokemon with non alphanumeric characters
 
 function parsePOKEAPI() {
 	// Parses the JSON reponse from a HTTP GET from POKEAPI
