@@ -8,7 +8,7 @@ Ryan Paton
 2020-07-16
 */
 
-var pokemonNames = {
+var pokemonList = {
 	bulbasaur: undefined,
 	ivysaur: undefined,
 	venusaur: undefined,
