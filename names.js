@@ -482,7 +482,7 @@ var pokemonNames = {
 	glaceon: undefined,
 	gliscor: undefined,
 	mamoswine: undefined,
-	porygon-z: undefined,
+	porygonz: undefined,
 	gallade: undefined,
 	probopass: undefined,
 	dusknoir: undefined,
