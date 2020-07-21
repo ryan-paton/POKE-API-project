@@ -11,6 +11,23 @@ Ryan Paton
 // TODO: Display cards with pokemon search history
 // TODO: change to allow pokemon with non alphanumeric characters
 
+function displayPokemon(pokemon) {
+	// Shows the information of the current Pokemon
+	// TODO: Display cards with more than just the picture of a pokemon
+	
+	var html = "<img src=" + pokemon.sprites.front_default + " alt=\"pokemon\"/>";
+	document.getElementById("results").innerHTML = html;
+}
+
+function displaySearchMessage(message) {
+	// Shows a message below the search area
+	
+	var messagePanel = document.getElementById("messagePanel");
+	messagePanel.innerHTML = message;
+	// unhide message panel
+	messagePanel.style.display = "block";
+}
+
 function parsePOKEAPI() {
 	// Parses the JSON reponse from a HTTP GET from POKEAPI
 	
@@ -19,10 +36,7 @@ function parsePOKEAPI() {
 	// Save the result to reduce requests to the POKEAPI
 	pokemonList[pokemon.name] = pokemon;
 	
-	// Add image of the pokemon to the webpage
-	// TODO: Display cards with more than just the picture of a pokemon
-	var html = "<img src=" + pokemon.sprites.front_default + " alt=\"pokemon\"/>";
-	document.getElementById("results").innerHTML = html;
+	displayPokemon(pokemon)
 }
 
 function requestPOKEAPI(searchName) {
@@ -50,12 +64,14 @@ function pokeSearch() {
 			requestPOKEAPI(searchText);
 		}
 		else {
-			//retrieve from cache
+			displayPokemon(pokemonList[searchText])
 		}
 	}
 	else {
-		// Display notice that pokemon does not exist
 		// TODO: suggest similar searches
+		
+		displaySearchMessage("The Pokemon \"" + searchText + "\" could not " +
+		"be found, please check spelling");
 	}
 }
 
