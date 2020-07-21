@@ -10,6 +10,7 @@ Ryan Paton
 // TODO: Display cards with more than just the picture of a pokemon
 // TODO: Display cards with pokemon search history
 // TODO: change to allow pokemon with non alphanumeric characters
+// TODO: Refactor message panel
 
 function displayPokemon(pokemon) {
 	// Shows the information of the current Pokemon
@@ -22,10 +23,10 @@ function displayPokemon(pokemon) {
 function displaySearchMessage(message) {
 	// Shows a message below the search area
 	
-	var messagePanel = document.getElementById("messagePanel");
+	var messageP = document.getElementById("messagePanel");
 	messagePanel.innerHTML = message;
 	// unhide message panel
-	messagePanel.style.display = "block";
+	messageP.parentNode.style.display = "block";
 }
 
 function parsePOKEAPI() {
