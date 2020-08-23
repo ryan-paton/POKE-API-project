@@ -1,78 +1,31 @@
 /*
 pokeAPI.js
 
-makes calls to POKEAPI
+makes calls to POKEAPI using the wrapper library "pokeapi-js-wrapper"
 
 Ryan Paton
-2020-07-01
+2020-08-24
 */
 
-// TODO: Display cards with more than just the picture of a pokemon
-// TODO: Display cards with pokemon search history
-// TODO: change to allow pokemon with non alphanumeric characters
-// TODO: Refactor message panel
+// Create new instance for the "pokeapi-js-wrapper"
+const DEX = new Pokedex.Pokedex();
 
-function displayPokemon(pokemon) {
-	// Shows the information of the current Pokemon
-	// TODO: Display cards with more than just the picture of a pokemon
-	
-	var html = "<img src=" + pokemon.sprites.front_default + " alt=\"pokemon\"/>";
-	document.getElementById("results").innerHTML = html;
+function populateSearchArea(response) {
+    console.log(response);
 }
 
-function displaySearchMessage(message) {
-	// Shows a message below the search area
-	
-	var messageP = document.getElementById("messagePanel");
-	messagePanel.innerHTML = message;
-	// unhide message panel
-	messageP.parentNode.style.display = "block";
+function requestSearchArea() {
+    // We only want the first 10 Pokemon for now
+    var interval = {
+        limit: 10, // Number of items
+        offset: 0 // Starting from this number
+    };
+    
+    DEX.getPokemonsList(interval).then(function(response) {
+        populateSearchArea(response);
+    });
 }
 
-function parsePOKEAPI() {
-	// Parses the JSON reponse from a HTTP GET from POKEAPI
-	
-	var pokemon = JSON.parse(this.responseText);
-	
-	// Save the result to reduce requests to the POKEAPI
-	pokemonList[pokemon.name] = pokemon;
-	
-	displayPokemon(pokemon)
-}
-
-function requestPOKEAPI(searchName) {
-	// Sends a HTTP GET request to the POKEAPI based in input in the search field
-	
-	var request = new XMLHttpRequest();
-	
-	request.addEventListener("load", parsePOKEAPI);
-	request.open("GET", "https://pokeapi.co/api/v2/pokemon/" + searchName + "/");
-	request.send();
-}
-
-function pokeSearch() {
-	/*
-	Compares the search input to the list of known pokemon names and then requests from
-	POKEAPI if the pokemon name exists
-	*/
-	
-	// Get user input from search bar
-	var searchText = document.getElementById("searchText").value;
-	searchText = searchText.toLowerCase();
-	
-	if (searchText in pokemonList) {
-		if (pokemonList[searchText] == undefined) {
-			requestPOKEAPI(searchText);
-		}
-		else {
-			displayPokemon(pokemonList[searchText])
-		}
-	}
-	else {
-		// TODO: suggest similar searches
-		
-		displaySearchMessage("The Pokemon \"" + searchText + "\" could not " +
-		"be found, please check spelling");
-	}
-}
+// populate the search area once the page is loaded
+window.addEventListener("load", requestSearchArea);
 

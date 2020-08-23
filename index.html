@@ -5,40 +5,29 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-		<title>POKE API Project</title>
+		<title>Mini PokeDex</title>
 		
-		<script src="names.js"></script>
+		<script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
 		<script src="pokeAPI.js"></script>
 	</head>
 	
 	<body>
-		<div class="w3-center">
+        <div class="w3-center">
+            <h1>Pokemon API mini PokeDex</h1>
+        </div>
+        
+		<div class="w3-content">
+            <!-- Information Area -->
+            <div>
+            
+            </div>
+            
 			<!-- Search Area -->
-			<div id="search-div">
-				<h1>Search for Pokemon</h1>
-				<p>Type the name of a pokemon and click search</p>
-				<div>
-					<input id="searchText" type="text"/>
-					<button onclick="pokeSearch()" type="button">Search</button>
+			<div>
+				<p>Choose a Pokemon to see more about it</p>
+				<div id="search" class="w3-row">
+					
 				</div>
-			</div>
-			
-			<!-- Display messages -->
-			<div class="w3-panel w3-blue w3-round-large w3-display-container"
-			style="display:none">
-				<span onclick="this.parentElement.style.display='none'"
-				class="w3-button w3-round-large w3-display-topright">&times;</span>
-				<p id="messagePanel"></p>
-			</div>
-			
-			<!-- Display results -->
-			<div id="results">
-			
-			</div>
-			
-			<!-- Search history -->
-			<div id="history">
-			
 			</div>
 		</div>
 	</body>
