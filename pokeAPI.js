@@ -108,9 +108,8 @@ function populateSearchArea(response) {
 }
 
 function requestPokemonList() {
-    // We only want the first 9 Pokemon for now
     var interval = {
-        limit: 9, // Number of items
+        limit: 151, // Number of items
         offset: 0 // Starting from this number
     };
     
