@@ -26,11 +26,11 @@
                 
                 <div class="w3-col l3 m4 s12">
                     <div class="w3-row">
-                        <p class="w3-half">Height:</p>
+                        <p class="w3-col l6 m6 s6">Height:</p>
                         <p id="info-height" class="w3-half"></p>
                     </div>
                     <div class="w3-row">
-                        <p class="w3-half">Weight:</p>
+                        <p class="w3-col l6 m6 s6">Weight:</p>
                         <p id="info-weight" class="w3-half"></p>
                     </div>
                     
@@ -38,6 +38,41 @@
                         <p>More information to come</p>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Controls -->
+            <div class="w3-row w3-center">
+                <button class="w3-button w3-col l1 m2 s3" value="0"
+                    onclick="requestPokemonList(this.value)">Gen I</button>
+                    
+                <button class="w3-button w3-col l1 m2 s3" value="151"
+                    onclick="requestPokemonList(this.value)">Gen II</button>
+                    
+                <button class="w3-button w3-col l1 m2 s3" value="251"
+                    onclick="requestPokemonList(this.value)">Gen III</button>
+                    
+                <button class="w3-button w3-col l1 m2 s3" value="386"
+                    onclick="requestPokemonList(this.value)">Gen IV</button>
+                    
+                <button class="w3-button w3-col l1 m2 s3" value="493"
+                    onclick="requestPokemonList(this.value)">Gen V</button>
+                    
+                <button class="w3-button w3-col l1 m2 s3" value="649"
+                    onclick="requestPokemonList(this.value)">Gen VI</button>
+                    
+                <button class="w3-button w3-col l1 m2 s3" value="721"
+                    onclick="requestPokemonList(this.value)">Gen VII</button>
+                    
+                <!-- Not yet updated
+                <button class="w3-button w3-col l1 m2 s3" value="809"
+                    onclick="requestPokemonList(this.value)">Gen VIII</button>-->
+            </div>
+            
+            <div class="w3-center w3-row">
+                <button class="w3-button w3-col l2 m3 s6"
+                    onclick="previousPage()">Previous Page</button>
+                <button class="w3-button w3-col l2 m3 s6"
+                    onclick="nextPage()">Next Page</button>
             </div>
             
 			<!-- Search Area -->

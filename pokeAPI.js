@@ -8,9 +8,13 @@ Ryan Paton
 */
 
 const POKE_DIV_CLASS = "w3-col l2 m2 s4";
+const MAX_POKEMON_INDEX = 808;
+const PAGE_SIZE = 36;
 
 // Create new instance for the "pokeapi-js-wrapper"
 const DEX = new Pokedex.Pokedex();
+
+var currentPokemonListIndex;
 
 function capitaliseWord(word) {
     // returns the given word with the first letter uppercase
@@ -106,22 +110,50 @@ function populateSearchArea(response) {
     var pokeList = response.results;
     var i;
     
+    searchArea.innerHTML = "";
     for (i = 0; i < pokeList.length; i++) {
         searchArea.appendChild(generatePokemonHTML(pokeList[i]));
     }
 }
 
-function requestPokemonList() {
+function nextPage() {
+    requestPokemonList(currentPokemonListIndex + PAGE_SIZE);
+}
+
+function previousPage() {
+    requestPokemonList(currentPokemonListIndex - PAGE_SIZE);
+}
+
+function clampPageIndex (index) {
+    // Make sure index is between 0 and (MAX_POKEMON_INDEX - PAGE_SIZE)
+    var maxValue = MAX_POKEMON_INDEX - PAGE_SIZE - 1;
+    if (index < 0) {
+        index = 0;
+    }
+    if (index > maxValue) {
+        index = maxValue;
+    }
+    return index;
+}
+
+function requestPokemonList(startAt = 0, toLimit = PAGE_SIZE) {
+    // Request list of pokemon to display
+    var index = clampPageIndex(Number(startAt));
     var interval = {
-        limit: 151, // Number of items
-        offset: 0 // Starting from this number
+        limit: toLimit, // Number of items
+        offset: index // Starting from this number
     };
+    currentPokemonListIndex = index;
     
     DEX.getPokemonsList(interval).then(function(response) {
         populateSearchArea(response);
     });
 }
 
+function initialise() {
+    requestPokemonList();
+}
+
 // populate the search area once the page is loaded
-window.addEventListener("load", requestPokemonList);
+window.addEventListener("load", initialise);
 
