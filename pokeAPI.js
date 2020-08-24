@@ -50,6 +50,10 @@ function pokemonClicked(pokemonDiv) {
     DEX.getPokemonByName(name).then(function(response) {
         handlePokemonResponse(response);
     });
+    
+    // Scroll to top to view what was just clicked on
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 
 function generatePokemonHTML(pokemon) {
