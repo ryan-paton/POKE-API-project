@@ -50,6 +50,7 @@ function formatWeight(weight) {
 }
 
 function pokemonClicked(pokemonDiv) {
+    // Requests more info for a pokemon when it is clicked on from the list
     var name = pokemonDiv.id;
     DEX.getPokemonByName(name).then(function(response) {
         handlePokemonResponse(response);
@@ -86,12 +87,14 @@ function generatePokemonHTML(pokemon) {
 }
 
 function handlePokemonImageResponse(response) {
+    // Updates the image for a pokemon in the list when a response is received
     var name = response.name;
     var imageElement = document.getElementById(name).firstChild;
     imageElement.src = response.sprites.front_default;
 }
 
 function setPokemonInformation(pokemon) {
+    // Displays the pokemon information
     var height = formatHeight(pokemon.height);
     var weight = formatWeight(pokemon.weight);
     
@@ -102,10 +105,12 @@ function setPokemonInformation(pokemon) {
 }
 
 function handlePokemonResponse(response) {
+    // When a pokemon request is received, display it's information
     setPokemonInformation(response);
 }
 
 function populateSearchArea(response) {
+    // Displays the list of pokemon once a request is received
     var searchArea = document.getElementById("search");
     var pokeList = response.results;
     var i;
@@ -116,24 +121,13 @@ function populateSearchArea(response) {
     }
 }
 
+/* --Button click handlers-- */
 function nextPage() {
     requestPokemonList(currentPokemonListIndex + PAGE_SIZE);
 }
 
 function previousPage() {
     requestPokemonList(currentPokemonListIndex - PAGE_SIZE);
-}
-
-function clampPageIndex (index) {
-    // Make sure index is between 0 and (MAX_POKEMON_INDEX - PAGE_SIZE)
-    var maxValue = MAX_POKEMON_INDEX - PAGE_SIZE - 1;
-    if (index < 0) {
-        index = 0;
-    }
-    if (index > maxValue) {
-        index = maxValue;
-    }
-    return index;
 }
 
 function requestPokemonList(startAt = 0, toLimit = PAGE_SIZE) {
@@ -148,6 +142,20 @@ function requestPokemonList(startAt = 0, toLimit = PAGE_SIZE) {
     DEX.getPokemonsList(interval).then(function(response) {
         populateSearchArea(response);
     });
+}
+
+/* ---- */
+
+function clampPageIndex (index) {
+    // Make sure index is between 0 and (MAX_POKEMON_INDEX - PAGE_SIZE)
+    var maxValue = MAX_POKEMON_INDEX - PAGE_SIZE - 1;
+    if (index < 0) {
+        index = 0;
+    }
+    if (index > maxValue) {
+        index = maxValue;
+    }
+    return index;
 }
 
 function initialise() {
