@@ -102,6 +102,7 @@ function setPokemonInformation(pokemon) {
     document.getElementById("info-img").src = pokemon.sprites.front_default;
     document.getElementById("info-height").innerHTML = height;
     document.getElementById("info-weight").innerHTML = weight;
+    document.getElementById("info-type").innerHTML = getPokemonTypeHTML(pokemon.types);
 }
 
 function handlePokemonResponse(response) {
