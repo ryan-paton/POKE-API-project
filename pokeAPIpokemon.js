@@ -7,17 +7,69 @@ Ryan Paton
 2020-08-28
 */
 
-function getPokemonTypeHTML(types) {
-    // Returns HTML to display the pokemon types from a list of types
-    var result = "";
-    var name, i;
+function createTypeHTML(type) {
+    // Returns HTML to display the pokemon type
+    var result = document.createElement("span");
+    var typeText = document.createElement("span");
+    
+    result.className = "pokemon-type " + type.name;
+    typeText.innerHTML = type.name;
+    result.appendChild(typeText);
+    
+    return result;
+}
+
+function createTypeListHTML(types) {
+    // Returns HTML to display a list of pokemon types
+    var result = document.createElement("div");
+    var i;
     
     for (i = 0; i < types.length; i++) {
-        name = types[i].type.name;
-        result += "<span class=\"pokemon-type " + name + "\">" + name + "</span>";
+        result.appendChild(createTypeHTML(types[i]));
     }
     
     return result;
+}
+
+function createLabelHTML(labelText) {
+    var result = document.createElement("label");
+    result.innerHTML = labelText;
+    return result;
+}
+
+function setPokemonTypeInfo(types) {
+    // Displays the pokemon types from a list of types
+    var typeInfo = document.getElementById("info-type");
+    typeInfo.innerHTML = "";
+    var type, typeHTML, i;
+    
+    for (i = 0; i < types.length; i++) {
+        type = types[i].type;
+        typeHTML = createTypeHTML(type);
+        typeHTML.id = type.name;
+        typeHTML.className += " effect-tip";
+        typeInfo.appendChild(typeHTML);
+        
+        DEX.getTypeByName(type.name).then(function(response) {
+            handlePokemonTypeResponse(response);
+        });
+    }
+}
+
+function handlePokemonTypeResponse(response) {
+    // Updates the pokemon type resistances popup
+    var type = document.getElementById(response.name);
+    var popup = document.createElement("div");
+    popup.className = "effect-text";
+    
+    popup.appendChild(createLabelHTML("Vulnerable against:"));
+    popup.appendChild(createTypeListHTML(response.damage_relations.double_damage_from));
+    popup.appendChild(createLabelHTML("Resistant to:"));
+    popup.appendChild(createTypeListHTML(response.damage_relations.half_damage_from));
+    popup.appendChild(createLabelHTML("Unaffected By:"));
+    popup.appendChild(createTypeListHTML(response.damage_relations.no_damage_from));
+    
+    type.appendChild(popup);
 }
 
 function pokemonClicked(pokemonDiv) {
@@ -73,7 +125,8 @@ function setPokemonInformation(pokemon) {
     document.getElementById("info-img").src = pokemon.sprites.front_default;
     document.getElementById("info-height").innerHTML = height;
     document.getElementById("info-weight").innerHTML = weight;
-    document.getElementById("info-type").innerHTML = getPokemonTypeHTML(pokemon.types);
+    
+    setPokemonTypeInfo(pokemon.types);
 }
 
 function handlePokemonResponse(response) {
