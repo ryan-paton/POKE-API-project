@@ -15,27 +15,34 @@ Ryan Paton
 .effect-tip .effect-text {
     visibility: hidden;
     min-width: 200px;
-    margin-left: -100px;
-    top: 100%;
+    margin-left: -30px;
+    top: 110%;
     left: 50%;
-    background-color: Gray;
+    background-color: gray;
     padding: 5px 0px;
     border-radius: 6px;
     position:absolute;
     z-index: 1;
 }
 
+
+@media only screen and (max-width: 850px) {
+    .effect-text span {
+        display: block;
+    }
+}
+
 /* display a little arrow */
-/*.effect-tip .effect-text::after {
+.effect-tip .effect-text::after {
     content: " ";
     position: absolute;
     bottom: 100%;
-    left: 50%;
-    margin-left: -5px;
+    left: 70px;
+    margin-left: -40px;
     border-width: 5px;
     border-style: solid;
     border-color: transparent transparent gray transparent;
-}*/
+}
 
 /* Show type effects on hover */
 .effect-tip:hover .effect-text {
