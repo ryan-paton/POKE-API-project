@@ -117,6 +117,30 @@ function handlePokemonImageResponse(response) {
     imageElement.src = response.sprites.front_default;
 }
 
+function getEnglishDescription(flavorTextEntries) {
+    // Searches from the end of the list to the start and returns the first
+    // occurance in english
+    var i = flavorTextEntries.length - 1;
+    var isFound = false;
+    var result = "No Description";
+    
+    while (i >= 0 && !(isFound)) {
+        var entry = flavorTextEntries[i];
+        if (entry.language.name == "en") {
+            isFound = true;
+            result = entry.flavor_text;
+        }
+        i--;
+    }
+    return result;
+}
+
+function handleSpeciesResponse(response) {
+    // Updates pokemon information
+    document.getElementById("info-desc").innerHTML = getEnglishDescription(
+        response.flavor_text_entries);
+}
+
 function setPokemonInformation(pokemon) {
     // Displays the pokemon information
     var height = formatHeight(pokemon.height);
@@ -129,6 +153,12 @@ function setPokemonInformation(pokemon) {
     document.getElementById("info-weight").innerHTML = weight;
     
     setPokemonTypeInfo(pokemon.types);
+    
+    document.getElementById("info-desc").innerHTML = "";
+    // Request species information
+    DEX.getPokemonSpeciesByName(pokemon.species.name).then(function(response) {
+        handleSpeciesResponse(response);
+    });
 }
 
 function handlePokemonResponse(response) {
