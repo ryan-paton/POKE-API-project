@@ -32,6 +32,7 @@ function createTypeListHTML(types) {
 }
 
 function createLabelHTML(labelText) {
+    // Returns HTML label element with the given string as it's text
     var result = document.createElement("label");
     result.innerHTML = labelText;
     return result;
@@ -120,8 +121,9 @@ function setPokemonInformation(pokemon) {
     // Displays the pokemon information
     var height = formatHeight(pokemon.height);
     var weight = formatWeight(pokemon.weight);
+    var title = "#" + pokemon.id + " " + capitaliseWord(pokemon.name);
     
-    document.getElementById("info-name").innerHTML = capitaliseWord(pokemon.name);
+    document.getElementById("info-name").innerHTML = title;
     document.getElementById("info-img").src = pokemon.sprites.front_default;
     document.getElementById("info-height").innerHTML = height;
     document.getElementById("info-weight").innerHTML = weight;
