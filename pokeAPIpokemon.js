@@ -141,9 +141,50 @@ function handlePreEvolutionResponse(response) {
         generatePokemonHTML(response));
 }
 
-function handleEvolutionChain(response) {
+function handleEvolutionResponse(response) {
     // Updates information about pokemon that can be evolved to
+    var evolutionElement = document.getElementById("info-evo-to");
+    var i;
     
+    for (i = 0; i < response.length; i++) {
+        evolutionElement.appendChild(generatePokemonHTML(response[i]));
+    }
+}
+
+function getNextPokemonEvolution(name, evolutionChain) {
+    // Recursively goes through a evolution chain and returns the list 
+    // of the next pokemon after the one given
+    var result = null;
+    
+    if (evolutionChain.species.name == name) {
+        result = evolutionChain.evolves_to;
+    }
+    else {
+        var evolutionList = evolutionChain.evolves_to;
+        var i = 0;
+        while (i < evolutionList.length && result == null) {
+            result = getNextPokemonEvolution(name, evolutionList[i]);
+            i++;
+        }
+    }
+    
+    return result;
+}
+
+function handleEvolutionChain(response) {
+    // Requests the pokemon that can be evolved to
+    var name = document.getElementById("info-name").title;
+    var evolutionList = getNextPokemonEvolution(name, response.chain);
+    var i, url, pokemonList = [];
+    
+    for (i = 0; i < evolutionList.length; i++) {
+        url = "/api/v2/pokemon/" + evolutionList[i].species.name;
+        pokemonList.push(url);
+    }
+    
+    DEX.resource(pokemonList).then(function(response) {
+        handleEvolutionResponse(response);
+    });
 }
 
 function handleSpeciesResponse(response) {
@@ -158,9 +199,9 @@ function handleSpeciesResponse(response) {
         });
     }
     
-    /*DEX.resource(response.evolution_chain.url).then(function(response) {
+    DEX.resource(response.evolution_chain.url).then(function(response) {
         handleEvolutionChain(response);
-    });*/
+    });
 }
 
 function setPokemonInformation(pokemon) {
@@ -170,6 +211,7 @@ function setPokemonInformation(pokemon) {
     var title = "#" + pokemon.id + " " + capitaliseWord(pokemon.name);
     
     document.getElementById("info-name").innerHTML = title;
+    document.getElementById("info-name").title = pokemon.name;
     document.getElementById("info-img").src = pokemon.sprites.front_default;
     document.getElementById("info-height").innerHTML = height;
     document.getElementById("info-weight").innerHTML = weight;
