@@ -135,10 +135,32 @@ function getEnglishDescription(flavorTextEntries) {
     return result;
 }
 
+function handlePreEvolutionResponse(response) {
+    // Updates information about the pokemon evolved from
+    document.getElementById("info-evo-from").appendChild(
+        generatePokemonHTML(response));
+}
+
+function handleEvolutionChain(response) {
+    // Updates information about pokemon that can be evolved to
+    
+}
+
 function handleSpeciesResponse(response) {
     // Updates pokemon information
     document.getElementById("info-desc").innerHTML = getEnglishDescription(
         response.flavor_text_entries);
+    
+    if (response.evolves_from_species != null) {
+        DEX.getPokemonByName(response.evolves_from_species.name).then(
+        function(response) {
+            handlePreEvolutionResponse(response);
+        });
+    }
+    
+    /*DEX.resource(response.evolution_chain.url).then(function(response) {
+        handleEvolutionChain(response);
+    });*/
 }
 
 function setPokemonInformation(pokemon) {
@@ -154,7 +176,11 @@ function setPokemonInformation(pokemon) {
     
     setPokemonTypeInfo(pokemon.types);
     
+    // Clear old information
     document.getElementById("info-desc").innerHTML = "";
+    document.getElementById("info-evo-from").innerHTML = "";
+    document.getElementById("info-evo-to").innerHTML = "";
+    
     // Request species information
     DEX.getPokemonSpeciesByName(pokemon.species.name).then(function(response) {
         handleSpeciesResponse(response);
