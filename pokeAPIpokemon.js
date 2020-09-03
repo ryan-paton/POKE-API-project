@@ -137,6 +137,7 @@ function getEnglishDescription(flavorTextEntries) {
 
 function handlePreEvolutionResponse(response) {
     // Updates information about the pokemon evolved from
+    document.getElementById("info-evo-from").innerHTML = "";
     document.getElementById("info-evo-from").appendChild(
         generatePokemonHTML(response));
 }
