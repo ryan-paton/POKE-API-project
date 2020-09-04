@@ -3,52 +3,56 @@
 	<!-- POKE API project -->
 	<head>
 		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-        <link rel="stylesheet" href="types.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"/>
+        <link rel="stylesheet" href="types.css"/>
+        
 		<title>Mini PokeDex</title>
+        <meta name="description" content="A basic PokeDex using the POKEAPI API"/>
+        <meta name="keywords" content="pokemon, pokedex"/>
 		
 		<script src="https://unpkg.com/pokeapi-js-wrapper/dist/index.js"></script>
 		<script src="pokeAPI.js"></script>
         <script src="pokeAPIpokemon.js"></script>
 	</head>
 	
-	<body>
+	<body class="w3-gray">
         <div class="w3-center">
             <h1>Pokemon API mini PokeDex</h1>
         </div>
         
-		<div class="w3-content">
+		<div class="w3-content w3-red w3-round-large">
             <!-- Information Area -->
-            <div class="w3-row w3-border w3-round">
+            <div class="w3-row w3-border w3-border-black w3-round-large">
                 <div>
-                    <div>
-                        <span><h3 id="info-name"></h3></span>
-                        <span>
+                    <div class="w3-padding">
+                        <div>
+                            <h3 id="info-name"></h3>
                             <div id="info-type" class="w3-row"></div>
-                        </span>
+                        </div>
+                        
+                        <img id="info-img" style="width:200px;"/>
+                        
+                        <div>
+                            <span>Height:</span>
+                            <span id="info-height"></span>
+                        </div>
+                        <div>
+                            <span>Weight:</span>
+                            <span id="info-weight"></span>
+                        </div>
+                        
+                        <p id="info-desc"></p>
                     </div>
                     
-                    <img id="info-img" style="width:200px;"/>
-                    
-                    <div>
-                        <span>Height:</span>
-                        <span id="info-height"></span>
-                    </div>
-                    <div>
-                        <span>Weight:</span>
-                        <span id="info-weight"></span>
-                    </div>
-                    
-                    <p id="info-desc"></p>
-                    
+                    <!-- Evolutions display area -->
                     <div class="w3-row">
                         <div class="w3-col l3 m4 s6">
-                            <label>Evolves From:</label>
+                            <label class="w3-padding">Evolves From:</label>
                             <div id="info-evo-from"></div>
                         </div>
                         <div class="w3-col l9 m8 s6">
-                            <label>Evolves To:</label>
+                            <label class="w3-padding">Evolves To:</label>
                             <div id="info-evo-to"></div>
                         </div>
                     </div>
@@ -56,7 +60,7 @@
             </div>
             
             <!-- Quick buttons to go to pokemon generaton -->
-            <div class="w3-row w3-center">
+            <div class="w3-row w3-center w3-margin">
                 <button class="w3-button w3-col l1 m2 s3" value="0"
                     onclick="requestPokemonList(this.value)">Gen I</button>
                     
@@ -84,23 +88,35 @@
             </div>
             
             <!-- Buttons for previous and next page -->
-            <div class="w3-center w3-row">
-                <button class="w3-button w3-col l2 m3 s6"
+            <div class="w3-margin w3-row">
+                <button class="w3-button w3-half w3-blue-gray"
                     onclick="previousPage()">Previous Page</button>
-                <button class="w3-button w3-col l2 m3 s6"
+                <button class="w3-button w3-half w3-blue-gray"
                     onclick="nextPage()">Next Page</button>
             </div>
             
 			<!-- Search Area -->
 			<div>
-				<p>Choose a Pokemon to see more about it</p>
-				<div id="search" class="w3-row">
+				<p class="w3-padding">Choose a Pokemon to see more about it</p>
+				<div id="search" class="w3-row-padding">
 					
 				</div>
 			</div>
             
+            <!-- Buttons for previous and next page -->
+            <div class="w3-margin w3-row">
+                <button class="w3-button w3-half w3-blue-gray"
+                    onclick="previousPage()">Previous Page</button>
+                <button class="w3-button w3-half w3-blue-gray"
+                    onclick="nextPage()">Next Page</button>
+            </div>
+            
             <div>
-                <p style="font-size:8px;margin-top:50px">hosted by GitHub Pages</p>
+                <p class="w3-margin w3-padding" style="font-size:8px;">
+                    Accesses the RESTful <a href="https://pokeapi.co/">PokeAPI</a> API<br>
+                    Coding by <a href="https://ryan-paton.github.io/">Ryan Paton</a><br>
+                    Hosted by GitHub Pages
+                </p>
             </div>
 		</div>
 	</body>

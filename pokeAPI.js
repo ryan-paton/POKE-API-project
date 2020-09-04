@@ -7,7 +7,10 @@ Ryan Paton
 2020-08-24
 */
 
-const POKE_DIV_CLASS = "w3-col l2 m2 s4";
+const POKE_DIV_CLASS = "w3-padding-small w3-center w3-col l2 m2 s4";
+const POKE_EVO_CLASS = "w3-padding-small w3-center w3-col l2 m4 s6";
+const POKE_INNER_DIV = "w3-light-gray w3-border w3-border-dark-gray w3-round-large";
+const POKE_INNER_DIV_STYLE = "min-width: 110px;";
 const MAX_POKEMON_INDEX = 808;
 const PAGE_SIZE = 36;
 

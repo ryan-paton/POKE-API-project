@@ -75,7 +75,7 @@ function handlePokemonTypeResponse(response) {
 
 function pokemonClicked(pokemonDiv) {
     // Requests more info for a pokemon when it is clicked on from the list
-    var name = pokemonDiv.id;
+    var name = pokemonDiv.firstChild.id;
     DEX.getPokemonByName(name).then(function(response) {
         handlePokemonResponse(response);
     });
@@ -88,15 +88,19 @@ function pokemonClicked(pokemonDiv) {
 function generatePokemonHTML(pokemon) {
     // Generates HTML for a single pokemon
     var pokeDiv = document.createElement("div");
+    var innerDiv = document.createElement("div");
     var pokeImage = document.createElement("img");
     var pokeName = document.createElement("p");
     
     // Set attributes
     pokeDiv.className = POKE_DIV_CLASS;
-    pokeDiv.id = pokemon.name;
     pokeDiv.onclick = function(){pokemonClicked(this)};
     pokeImage.alt = pokemon.name;
     pokeName.innerHTML = capitaliseWord(pokemon.name);
+    
+    innerDiv.className = POKE_INNER_DIV;
+    innerDiv.id = pokemon.name;
+    innerDiv.style = POKE_INNER_DIV_STYLE;
     
     // request the image
     DEX.getPokemonByName(pokemon.name).then(function(response) {
@@ -104,8 +108,9 @@ function generatePokemonHTML(pokemon) {
     });
     
     // Put the image and name inside the div element
-    pokeDiv.appendChild(pokeImage);
-    pokeDiv.appendChild(pokeName);
+    innerDiv.appendChild(pokeImage);
+    innerDiv.appendChild(pokeName);
+    pokeDiv.appendChild(innerDiv);
     
     return pokeDiv;
 }
@@ -145,10 +150,12 @@ function handlePreEvolutionResponse(response) {
 function handleEvolutionResponse(response) {
     // Updates information about pokemon that can be evolved to
     var evolutionElement = document.getElementById("info-evo-to");
-    var i;
+    var i, pokemon;
     
     for (i = 0; i < response.length; i++) {
-        evolutionElement.appendChild(generatePokemonHTML(response[i]));
+        pokemon = generatePokemonHTML(response[i]);
+        pokemon.className = POKE_EVO_CLASS;
+        evolutionElement.appendChild(pokemon);
     }
 }
 
