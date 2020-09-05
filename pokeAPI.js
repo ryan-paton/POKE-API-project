@@ -103,6 +103,9 @@ function clampPageIndex (index) {
 
 function initialise() {
     requestPokemonList();
+    DEX.getPokemonByName("pikachu").then(function(response) {
+        handlePokemonResponse(response);
+    });
 }
 
 // populate the search area once the page is loaded
