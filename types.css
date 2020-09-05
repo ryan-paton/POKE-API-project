@@ -7,6 +7,14 @@ Ryan Paton
 2020-08-28
 */
 
+.poke-gen-button button {
+    background-color: #607D8B;
+    width: 12%;
+    border: 1px solid black;
+    border-radius: 4px;
+    margin: 4px 0px;
+}
+
 .effect-tip {
     position: relative;
     display: inline-block;
@@ -25,9 +33,14 @@ Ryan Paton
     z-index: 1;
 }
 
-
+/* adjust for smaller screens */
 @media only screen and (max-width: 850px) {
     .effect-text span {
+        display: block;
+    }
+    
+    .poke-gen-button button {
+        width: 100%;
         display: block;
     }
 }
